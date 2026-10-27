@@ -1,0 +1,58 @@
+{
+  "work_dir": "./mlff_run",
+  "type_map": ["C", "N", "H"],
+  "seed_base": 1000,
+  "backend_flag": "--tf",
+  "cleanup_checkpoints": false,
+
+  "data": {
+    "train_db": "/path/to/train_data.db",
+    "valid_db": "/path/to/valid_data.db",
+    "test_db": "/path/to/test_data.db",
+    "max_fmax": null,
+    "set_keys": ["setname", "seedname"]
+  },
+
+  "model": {
+    "descriptor": {
+      "type": "se_e2_a",
+      "sel": "auto",
+      "rcut_smth": 0.5,
+      "rcut": 6.0,
+      "neuron": [25, 50, 100],
+      "axis_neuron": 16
+    },
+    "fitting_net": {
+      "type": "ener",
+      "neuron": [120, 120, 120],
+      "resnet_dt": true
+    }
+  },
+
+  "learning_rate": {
+    "type": "exp",
+    "start_lr": 1e-3,
+    "stop_lr": 5e-8,
+    "decay_steps": 5000
+  },
+
+  "loss": {
+    "type": "ener",
+    "start_pref_e": 0.1,
+    "limit_pref_e": 1.0,
+    "start_pref_f": 1000,
+    "limit_pref_f": 1.0,
+    "start_pref_v": 0,
+    "limit_pref_v": 0
+  },
+
+  "training": {
+    "numb_steps": 500000,
+    "freeze_every": 100000,
+    "save_freq": 100000,
+    "disp_freq": 1000,
+    "batch_size": "auto",
+    "valid_batch_size": "auto",
+    "numb_btch": 4
+  }
+}
